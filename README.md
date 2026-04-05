@@ -434,6 +434,4 @@ This file is **project-scoped**. A separate global `~/.claude/CLAUDE.md` (or per
 
 ### Deferred
 
-| Item | Notes |
-|---|---|
-| `VOLUME_TABLE` completeness | `iron_ingot` (0.4), `steel_ingot` (0.5), `silicone_block` (0.1) confirmed from awakening.wiki. Remaining entries (`armor_plating`, `industrial_pump`, `military_power_regulator`, `salvaged_metal`, `thermoelectric_cooler`, ingot variants) are estimates — update when verified in-game. |
+Nothing at this stage. All `VOLUME_TABLE` values are confirmed from awakening.wiki item pages.
