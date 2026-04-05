@@ -162,8 +162,8 @@ export function computePowerBudget(entries: BuildEntry[], items: Item[]): PowerB
 /**
  * Computes the total water capacity and passive production rate for a build plan.
  *
- * water_capacity is static storage (litres); water_production_rate is passive
- * production (litres/hour) typically from Windtraps.
+ * water_capacity is static storage (ml); water_production_rate is passive
+ * production (ml/hr) typically from Windtraps.
  * hours_to_fill = total_capacity / production_rate; Infinity when rate is 0.
  *
  * @param entries - Build plan entries.
@@ -230,8 +230,8 @@ export function computeConsumables(entries: BuildEntry[], items: Item[], days: n
 /**
  * Computes the number of transport runs required to haul all build materials.
  *
- * For each material, looks up volume_per_unit in VOLUME_TABLE (fallback: VOLUME_DEFAULT).
- * total_volume = sum of (qty * volume_per_unit) across all materials.
+ * For each material, looks up its volume in VOLUME_TABLE (fallback: VOLUME_DEFAULT).
+ * total_volume = sum of (qty * volume) across all materials.
  * total_capacity = sum of (container.volume * container.count) across all containers.
  * trips = Math.ceil(total_volume / total_capacity), minimum 1 when materials exist.
  *

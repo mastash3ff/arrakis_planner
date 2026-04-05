@@ -18,7 +18,6 @@ function makeItem(overrides: Partial<Item>): Item {
     water_production_rate: 0,
     consumables: [],
     deep_desert_eligible: true,
-    volume_per_unit: 0.1,
     ...overrides,
   };
 }

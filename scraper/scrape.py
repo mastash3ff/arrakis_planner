@@ -335,7 +335,6 @@ def scrape_item_page(url: str, soup: BeautifulSoup) -> dict[str, Any] | None:
         "water_production_rate": water_production_rate,
         "consumables": consumables,
         "deep_desert_eligible": deep_desert_eligible,
-        "volume_per_unit": 0.1,  # override via manual_overrides.json
     }
     if incomplete:
         item["incomplete"] = True

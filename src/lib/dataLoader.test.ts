@@ -24,7 +24,6 @@ function makeValidItem(overrides: Record<string, unknown> = {}): unknown {
     water_production_rate: 0.75,
     consumables: [{ item_id: 'makeshift_filter', quantity: 8 }],
     deep_desert_eligible: true,
-    volume_per_unit: 0.1,
     ...overrides,
   };
 }
@@ -129,11 +128,6 @@ describe('validateItemsData', () => {
 
   it('throws when water_capacity is missing', () => {
     const file = makeValidFile({ items: [makeValidItem({ water_capacity: undefined })] });
-    expect(() => validateItemsData(file)).toThrow(DataLoadError);
-  });
-
-  it('throws when volume_per_unit is missing', () => {
-    const file = makeValidFile({ items: [makeValidItem({ volume_per_unit: undefined })] });
     expect(() => validateItemsData(file)).toThrow(DataLoadError);
   });
 

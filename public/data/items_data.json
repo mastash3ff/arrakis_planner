@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "scraped_at": "2026-04-05T20:59:43.079130+00:00",
+  "scraped_at": "2026-04-05T21:11:32.081409+00:00",
   "items": [
     {
       "id": "advanced_fremen_deathstill",
@@ -25,8 +25,7 @@
       "water_capacity": 500,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "advanced_garment_fabricator",
@@ -63,8 +62,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "advanced_sub_fief_console",
@@ -81,8 +79,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "advanced_survival_fabricator",
@@ -119,8 +116,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "advanced_vehicle_fabricator",
@@ -157,8 +153,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "advanced_weapons_fabricator",
@@ -195,8 +190,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "augmentation_station",
@@ -233,8 +227,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "blood_purifier",
@@ -251,8 +244,7 @@
       "water_capacity": 1000,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "chest",
@@ -269,8 +261,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "fabricator",
@@ -287,8 +278,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "fremen_deathstill",
@@ -313,8 +303,7 @@
       "water_capacity": 500,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "garment_fabricator",
@@ -335,8 +324,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "improved_blood_purifier",
@@ -361,8 +349,7 @@
       "water_capacity": 1000,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "large_ore_refinery",
@@ -399,8 +386,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "large_spice_refinery",
@@ -437,8 +423,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "large_water_cistern",
@@ -463,8 +448,7 @@
       "water_capacity": 100000,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "large_windtrap",
@@ -502,8 +486,7 @@
           "quantity": 1
         }
       ],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "medium_chemical_refinery",
@@ -532,8 +515,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "medium_ore_refinery",
@@ -558,8 +540,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "medium_spice_refinery",
@@ -592,8 +573,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "medium_storage_container",
@@ -618,8 +598,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "medium_water_cistern",
@@ -640,8 +619,7 @@
       "water_capacity": 25000,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "recycler",
@@ -658,8 +636,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "repair_station",
@@ -676,8 +653,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "small_chemical_refinery",
@@ -694,8 +670,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "small_ore_refinery",
@@ -712,8 +687,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "small_storage_container",
@@ -730,8 +704,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "spice_refinery",
@@ -760,8 +733,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "spice_powered_generator",
@@ -803,8 +775,7 @@
           "quantity": 24
         }
       ],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "storage_container",
@@ -825,8 +796,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "sub_fief_console",
@@ -843,8 +813,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "survival_fabricator",
@@ -865,8 +834,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "vehicles_fabricator",
@@ -887,8 +855,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "water_cistern",
@@ -905,8 +872,7 @@
       "water_capacity": 25000,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "weapons_fabricator",
@@ -927,8 +893,7 @@
       "water_capacity": 0,
       "water_production_rate": 0.0,
       "consumables": [],
-      "deep_desert_eligible": false,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": false
     },
     {
       "id": "wind_turbine_directional",
@@ -962,8 +927,7 @@
           "quantity": 24
         }
       ],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "wind_turbine_omnidirectional",
@@ -993,8 +957,7 @@
           "quantity": 24
         }
       ],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     },
     {
       "id": "windtrap",
@@ -1028,8 +991,7 @@
           "quantity": 3
         }
       ],
-      "deep_desert_eligible": true,
-      "volume_per_unit": 0.1
+      "deep_desert_eligible": true
     }
   ]
 }

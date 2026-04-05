@@ -55,11 +55,6 @@ export interface Item {
   consumables: MaterialCost[];
   /** Whether this structure can be deployed in the Deep Desert. */
   deep_desert_eligible: boolean;
-  /**
-   * Volume (in transport units) occupied by one of this placeable when carried.
-   * Used by computeTrips() to calculate total cargo volume.
-   */
-  volume_per_unit: number;
   /** Set by the scraper when one or more fields could not be parsed. */
   incomplete?: boolean;
 }
@@ -92,7 +87,7 @@ export interface StorageConfig {
 }
 
 export interface TripPlan {
-  total_volume: number; // sum of (material_qty * volume_per_unit) for all materials
+  total_volume: number; // sum of (material_qty * VOLUME_TABLE[material_id]) for all materials
   total_capacity: number; // sum of (container.volume * container.count)
   trips: number; // Math.ceil(total_volume / total_capacity), minimum 1
 }

@@ -27,7 +27,6 @@ const windtrapT1: Item = {
   water_production_rate: 50,
   consumables: [],
   deep_desert_eligible: true,
-  volume_per_unit: 2.0,
 };
 
 /** Windtrap T2 — has crafting tree with two-level intermediates. */
@@ -69,7 +68,6 @@ const windtrapT2: Item = {
   water_production_rate: 250,
   consumables: [],
   deep_desert_eligible: true,
-  volume_per_unit: 3.0,
 };
 
 /** Solar collector — generates power. */
@@ -98,7 +96,6 @@ const solarCollector: Item = {
   water_production_rate: 0,
   consumables: [],
   deep_desert_eligible: true,
-  volume_per_unit: 2.5,
 };
 
 /** Spice refinery — consumes water per day. */
@@ -113,7 +110,6 @@ const spiceRefinery: Item = {
   water_production_rate: 0,
   consumables: [{ item_id: 'water', quantity: 200 }],
   deep_desert_eligible: true,
-  volume_per_unit: 4.0,
 };
 
 const ALL_ITEMS: Item[] = [windtrapT1, windtrapT2, solarCollector, spiceRefinery];

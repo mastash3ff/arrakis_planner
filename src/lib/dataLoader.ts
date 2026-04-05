@@ -78,7 +78,7 @@ function validateItem(raw: unknown, index: number): void {
     );
   }
 
-  const requiredNumbers = ['power_delta', 'water_capacity', 'water_production_rate', 'volume_per_unit'];
+  const requiredNumbers = ['power_delta', 'water_capacity', 'water_production_rate'];
   for (const field of requiredNumbers) {
     if (typeof item[field] !== 'number') {
       throw new DataLoadError(
