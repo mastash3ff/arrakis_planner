@@ -170,8 +170,10 @@ export const VOLUME_DEFAULT = 0.1;
 // ─── Transport container presets ──────────────────────────────────────────────
 
 export const CONTAINER_PRESETS: ContainerType[] = [
-  { name: 'Small Storage Box', volume: 175, count: 0 },
-  { name: 'Medium Storage Box', volume: 500, count: 0 },
+  { name: 'Small Storage Container', volume: 250, count: 0 },
+  { name: 'Chest', volume: 750, count: 0 },
   { name: 'Assault Ornithopter', volume: 1000, count: 1 },
+  { name: 'Storage Container', volume: 1750, count: 0 },
+  { name: 'Medium Storage Container', volume: 3500, count: 0 },
   { name: 'Carrier Ornithopter Cargo Container', volume: 15000, count: 0 },
 ];
