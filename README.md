@@ -434,7 +434,6 @@ This file is **project-scoped**. A separate global `~/.claude/CLAUDE.md` (or per
 
 ### Deferred
 
-| Feature | Notes |
+| Item | Notes |
 |---|---|
-| `water_production_rate` units | The wiki "Water Gather Rate" field (e.g. 0.75 for Windtrap) has an unconfirmed unit; override via `manual_overrides.json` once measured in-game |
-| `volume_per_unit` per placeable | Individual placeable transport volumes default to `0.1`; need in-game measurement before `manual_overrides.json` can be populated |
+| `VOLUME_TABLE` completeness | `iron_ingot` (0.4), `steel_ingot` (0.5), `silicone_block` (0.1) confirmed from awakening.wiki. Remaining entries (`armor_plating`, `industrial_pump`, `military_power_regulator`, `salvaged_metal`, `thermoelectric_cooler`, ingot variants) are estimates — update when verified in-game. |
