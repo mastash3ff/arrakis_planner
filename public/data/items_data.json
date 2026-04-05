@@ -1,0 +1,1016 @@
+{
+  "version": "1.0.0",
+  "scraped_at": "2026-04-05T19:54:21.929597+00:00",
+  "items": [
+    {
+      "id": "advanced_fremen_deathstill",
+      "name": "Advanced Fremen Deathstill",
+      "category": "water",
+      "build_cost": [
+        {
+          "item_id": "duraluminum_ingot",
+          "quantity": 240
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 170
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 70
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -350,
+      "water_capacity": 500,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "advanced_garment_fabricator",
+      "name": "Advanced Garment Fabricator",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "plastanium_ingot",
+          "quantity": 140
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 180
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 100
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 45
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 150
+        },
+        {
+          "item_id": "armor_plating",
+          "quantity": 115
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -150,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "advanced_sub_fief",
+      "name": "Advanced Sub-Fief",
+      "category": "utility",
+      "build_cost": [],
+      "crafting_tree": null,
+      "power_delta": 0,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1,
+      "incomplete": true
+    },
+    {
+      "id": "advanced_sub_fief_console",
+      "name": "Advanced Sub-Fief Console",
+      "category": "utility",
+      "build_cost": [
+        {
+          "item_id": "salvaged_metal",
+          "quantity": 40
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -15,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "advanced_survival_fabricator",
+      "name": "Advanced Survival Fabricator",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "plastanium_ingot",
+          "quantity": 140
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 180
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 100
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 45
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 150
+        },
+        {
+          "item_id": "thermoelectric_cooler",
+          "quantity": 30
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -150,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "advanced_vehicle_fabricator",
+      "name": "Advanced Vehicle Fabricator",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "plastanium_ingot",
+          "quantity": 140
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 180
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 100
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 45
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 150
+        },
+        {
+          "item_id": "industrial_pump",
+          "quantity": 50
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -150,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "advanced_weapons_fabricator",
+      "name": "Advanced Weapons Fabricator",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "plastanium_ingot",
+          "quantity": 140
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 180
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 100
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 45
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 150
+        },
+        {
+          "item_id": "military_power_regulator",
+          "quantity": 40
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -150,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "augmentation_station",
+      "name": "Augmentation Station",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "plastanium_ingot",
+          "quantity": 75
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 180
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 50
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 15
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 75
+        },
+        {
+          "item_id": "advanced_machinery",
+          "quantity": 10
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -50,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "blood_purifier",
+      "name": "Blood Purifier",
+      "category": "water",
+      "build_cost": [
+        {
+          "item_id": "salvaged_metal",
+          "quantity": 70
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -10,
+      "water_capacity": 1000,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "chest",
+      "name": "Chest",
+      "category": "storage",
+      "build_cost": [
+        {
+          "item_id": "iron_ingot",
+          "quantity": 20
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": 0,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "fabricator",
+      "name": "Fabricator",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "salvaged_metal",
+          "quantity": 75
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -10,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "fremen_deathstill",
+      "name": "Fremen Deathstill",
+      "category": "water",
+      "build_cost": [
+        {
+          "item_id": "steel_ingot",
+          "quantity": 60
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 28
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 32
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -200,
+      "water_capacity": 500,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "garment_fabricator",
+      "name": "Garment Fabricator",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "steel_ingot",
+          "quantity": 40
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 30
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -40,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "improved_blood_purifier",
+      "name": "Improved Blood Purifier",
+      "category": "water",
+      "build_cost": [
+        {
+          "item_id": "iron_ingot",
+          "quantity": 50
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 16
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 20
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -35,
+      "water_capacity": 1000,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "large_ore_refinery",
+      "name": "Large Ore Refinery",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "plastanium_ingot",
+          "quantity": 380
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 540
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 400
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 200
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 745
+        },
+        {
+          "item_id": "advanced_machinery",
+          "quantity": 40
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -350,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "large_spice_refinery",
+      "name": "Large Spice Refinery",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "plastanium_ingot",
+          "quantity": 950
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 1080
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 350
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 1000
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 1110
+        },
+        {
+          "item_id": "advanced_machinery",
+          "quantity": 55
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -500,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "large_water_cistern",
+      "name": "Large Water Cistern",
+      "category": "water",
+      "build_cost": [
+        {
+          "item_id": "duraluminum_ingot",
+          "quantity": 150
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 160
+        },
+        {
+          "item_id": "industrial_pump",
+          "quantity": 25
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": 0,
+      "water_capacity": 100000,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "large_windtrap",
+      "name": "Large Windtrap",
+      "category": "water",
+      "build_cost": [
+        {
+          "item_id": "duraluminum_ingot",
+          "quantity": 240
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 250
+        },
+        {
+          "item_id": "calibrated_servok",
+          "quantity": 70
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 5
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -135,
+      "water_capacity": 500,
+      "water_production_rate": 1.75,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "medium_chemical_refinery",
+      "name": "Medium Chemical Refinery",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "duraluminum_ingot",
+          "quantity": 150
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 90
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 50
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 35
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -350,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "medium_ore_refinery",
+      "name": "Medium Ore Refinery",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "steel_ingot",
+          "quantity": 125
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 60
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 50
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -45,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "medium_spice_refinery",
+      "name": "Medium Spice Refinery",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "plastanium_ingot",
+          "quantity": 285
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 225
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 135
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 100
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 190
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -350,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "medium_storage_container",
+      "name": "Medium Storage Container",
+      "category": "storage",
+      "build_cost": [
+        {
+          "item_id": "plastanium_ingot",
+          "quantity": 70
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 14
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 4
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": 0,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "medium_water_cistern",
+      "name": "Medium Water Cistern",
+      "category": "water",
+      "build_cost": [
+        {
+          "item_id": "steel_ingot",
+          "quantity": 60
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 30
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": 0,
+      "water_capacity": 25000,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "recycler",
+      "name": "Recycler",
+      "category": "utility",
+      "build_cost": [
+        {
+          "item_id": "copper_ingot",
+          "quantity": 30
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -15,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "repair_station",
+      "name": "Repair Station",
+      "category": "utility",
+      "build_cost": [
+        {
+          "item_id": "iron_ingot",
+          "quantity": 40
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -20,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "small_chemical_refinery",
+      "name": "Small Chemical Refinery",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "copper_ingot",
+          "quantity": 45
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -15,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "small_ore_refinery",
+      "name": "Small Ore Refinery",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "salvaged_metal",
+          "quantity": 90
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -15,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "small_storage_container",
+      "name": "Small Storage Container",
+      "category": "storage",
+      "build_cost": [
+        {
+          "item_id": "salvaged_metal",
+          "quantity": 35
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": 0,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "spice_refinery",
+      "name": "Spice Refinery",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "duraluminum_ingot",
+          "quantity": 160
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 130
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 80
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 70
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -200,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "spice_powered_generator",
+      "name": "Spice-Powered Generator",
+      "category": "power",
+      "build_cost": [
+        {
+          "item_id": "plastanium_ingot",
+          "quantity": 430
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 180
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 270
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 100
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 300
+        },
+        {
+          "item_id": "advanced_machinery",
+          "quantity": 40
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": 1000,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "storage_container",
+      "name": "Storage Container",
+      "category": "storage",
+      "build_cost": [
+        {
+          "item_id": "aluminum_ingot",
+          "quantity": 45
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 8
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": 0,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "sub_fief_console",
+      "name": "Sub-Fief Console",
+      "category": "utility",
+      "build_cost": [
+        {
+          "item_id": "salvaged_metal",
+          "quantity": 25
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -15,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "survival_fabricator",
+      "name": "Survival Fabricator",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "steel_ingot",
+          "quantity": 40
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 30
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -40,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "vehicles_fabricator",
+      "name": "Vehicles Fabricator",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "steel_ingot",
+          "quantity": 40
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 30
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -40,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "water_cistern",
+      "name": "Water Cistern",
+      "category": "water",
+      "build_cost": [
+        {
+          "item_id": "copper_ingot",
+          "quantity": 25
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": 0,
+      "water_capacity": 25000,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "weapons_fabricator",
+      "name": "Weapons Fabricator",
+      "category": "production",
+      "build_cost": [
+        {
+          "item_id": "steel_ingot",
+          "quantity": 40
+        },
+        {
+          "item_id": "complex_machinery",
+          "quantity": 30
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -40,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": false,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "wind_turbine_directional",
+      "name": "Wind Turbine Directional",
+      "category": "power",
+      "build_cost": [
+        {
+          "item_id": "duraluminum_ingot",
+          "quantity": 120
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 160
+        },
+        {
+          "item_id": "calibrated_servok",
+          "quantity": 50
+        },
+        {
+          "item_id": "spice_melange",
+          "quantity": 3
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": 350,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "wind_turbine_omnidirectional",
+      "name": "Wind Turbine Omnidirectional",
+      "category": "power",
+      "build_cost": [
+        {
+          "item_id": "steel_ingot",
+          "quantity": 45
+        },
+        {
+          "item_id": "cobalt_paste",
+          "quantity": 65
+        },
+        {
+          "item_id": "calibrated_servok",
+          "quantity": 20
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": 150,
+      "water_capacity": 0,
+      "water_production_rate": 0.0,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    },
+    {
+      "id": "windtrap",
+      "name": "Windtrap",
+      "category": "water",
+      "build_cost": [
+        {
+          "item_id": "steel_ingot",
+          "quantity": 90
+        },
+        {
+          "item_id": "silicone_block",
+          "quantity": 30
+        },
+        {
+          "item_id": "calibrated_servok",
+          "quantity": 20
+        }
+      ],
+      "crafting_tree": null,
+      "power_delta": -75,
+      "water_capacity": 500,
+      "water_production_rate": 0.75,
+      "consumables": [],
+      "deep_desert_eligible": true,
+      "volume_per_unit": 0.1
+    }
+  ]
+}

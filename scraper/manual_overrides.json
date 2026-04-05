@@ -1,0 +1,4 @@
+{
+  "_comment": "Manual corrections keyed by item.id. Fields here override scraped values after each run. Use --merge flag when running scrape.py.",
+  "_water_note": "water_production_rate is sourced from the wiki 'Water Gather Rate' field. The wiki unit is unconfirmed — windtrap scrapes as 0.75 and large_windtrap as 1.75, giving hours_to_fill ≈ 667h and ≈ 286h respectively. Verify in-game before overriding."
+}
