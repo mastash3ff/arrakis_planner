@@ -291,18 +291,21 @@ def scrape_item_page(url: str, soup: BeautifulSoup) -> dict[str, Any] | None:
         power_delta = 0
 
     # ── Water ─────────────────────────────────────────────────────────────────
+    # water_capacity is in ml (e.g. Windtrap = 500 ml).
     water_capacity = parse_number(
         infobox_data.get("water_capacity", "0"), "water_capacity", name
     )
-    # The wiki field is "Water Gather Rate" (a float, e.g. 0.75).
-    # Unit is not confirmed as L/hr — use manual_overrides.json for corrected values.
-    water_production_rate = parse_float(
+    # The wiki "Water Gather Rate" field is in ml/s (e.g. 0.75 ml/s for Windtrap).
+    # We convert to ml/hr here so that hours_to_fill = capacity_ml / rate_ml_hr.
+    # Confirmed: 0.75 ml/s × 3600 = 2700 ml/hr → fills 500 ml tank in ~11 min.
+    water_rate_ml_s = parse_float(
         infobox_data.get("water_gather_rate")
         or infobox_data.get("water_production")
         or infobox_data.get("water_production_rate")
         or "0",
         "water_production_rate", name,
     )
+    water_production_rate = water_rate_ml_s * 3600  # convert ml/s → ml/hr
 
     # ── Build Cost section ────────────────────────────────────────────────────
     build_cost = scrape_build_cost(soup, name)

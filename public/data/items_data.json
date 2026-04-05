@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "scraped_at": "2026-04-05T20:55:53.026012+00:00",
+  "scraped_at": "2026-04-05T20:59:43.079130+00:00",
   "items": [
     {
       "id": "advanced_fremen_deathstill",
@@ -491,7 +491,7 @@
       "crafting_tree": null,
       "power_delta": -135,
       "water_capacity": 500,
-      "water_production_rate": 1.75,
+      "water_production_rate": 6300.0,
       "consumables": [
         {
           "item_id": "particulate_filter",
@@ -1017,7 +1017,7 @@
       "crafting_tree": null,
       "power_delta": -75,
       "water_capacity": 500,
-      "water_production_rate": 0.75,
+      "water_production_rate": 2700.0,
       "consumables": [
         {
           "item_id": "makeshift_filter",

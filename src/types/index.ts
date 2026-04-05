@@ -42,9 +42,14 @@ export interface Item {
   crafting_tree: CraftingNode | null;
   /** Net power in kW. Positive = generation, negative = consumption, 0 = neutral. */
   power_delta: number;
-  /** Static water storage capacity in litres. */
+  /** Static water storage capacity in millilitres (e.g. Windtrap = 500 ml). */
   water_capacity: number;
-  /** Passive water production in litres per hour. */
+  /**
+   * Passive water production in ml/hr.
+   * Scraped from the wiki "Water Gather Rate" field (native unit: ml/s) and
+   * converted to ml/hr (×3600) so that hours_to_fill = capacity / rate.
+   * E.g. Windtrap: 0.75 ml/s → 2700 ml/hr → fills 500 ml tank in ~11 min.
+   */
   water_production_rate: number;
   /** Resources consumed per day while the structure is active. */
   consumables: MaterialCost[];
@@ -101,8 +106,8 @@ export interface PowerBudget {
 }
 
 export interface WaterBudget {
-  total_capacity: number; // litres stored
-  production_rate: number; // litres/hour
+  total_capacity: number; // ml stored (sum of water_capacity × qty)
+  production_rate: number; // ml/hr (sum of water_production_rate × qty)
   hours_to_fill: number; // total_capacity / production_rate; Infinity when rate is 0
 }
 
@@ -122,8 +127,11 @@ export interface ItemsDataFile {
  * Used by computeTrips() when calculating total cargo volume.
  * Fallback value for unlisted materials: 0.10.
  *
- * Sources: in-game measurement. Cobalt Paste patched from 1.0 → 0.50.
+ * Sources: in-game measurement and awakening.wiki item pages.
+ * Confirmed: iron_ingot 0.4, steel_ingot 0.5, silicone_block 0.1.
+ * Cobalt Paste patched from 1.0 → 0.50.
  * Aluminum Ingot / Duraluminum Ingot / Plastanium Ingot: inferred — verify in-game.
+ * armor_plating / industrial_pump / military_power_regulator / thermoelectric_cooler: estimated.
  */
 export const VOLUME_TABLE: Record<string, number> = {
   // ── Ingots ────────────────────────────────────────────────────────────────────
@@ -135,7 +143,7 @@ export const VOLUME_TABLE: Record<string, number> = {
   plastanium_ingot: 0.9,
 
   // ── Processed materials ───────────────────────────────────────────────────────
-  silicone_block: 0.5,
+  silicone_block: 0.1,
   cobalt_paste: 0.5,
   spice_melange: 0.25,
 

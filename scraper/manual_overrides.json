@@ -1,4 +1,4 @@
 {
   "_comment": "Manual corrections keyed by item.id. Fields here override scraped values after each run. Use --merge flag when running scrape.py.",
-  "_water_note": "water_production_rate is sourced from the wiki 'Water Gather Rate' field. The wiki unit is unconfirmed — windtrap scrapes as 0.75 and large_windtrap as 1.75, giving hours_to_fill ≈ 667h and ≈ 286h respectively. Verify in-game before overriding."
+  "_water_note": "water_production_rate is scraped from the wiki 'Water Gather Rate' field (native unit: ml/s) and converted to ml/hr by the scraper (×3600). Confirmed unit from multiple sources (awakening.wiki, FextraLife). Windtrap: 0.75 ml/s → 2700 ml/hr; Large Windtrap: 1.75 ml/s → 6300 ml/hr. No overrides needed — scraper conversion is correct."
 }
