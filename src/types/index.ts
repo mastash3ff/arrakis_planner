@@ -122,25 +122,21 @@ export interface ItemsDataFile {
  * Used by computeTrips() when calculating total cargo volume.
  * Fallback value for unlisted materials: 0.10.
  *
- * Sources: in-game measurement and awakening.wiki item pages.
- * Confirmed: iron_ingot 0.4, steel_ingot 0.5, silicone_block 0.1.
- * Cobalt Paste patched from 1.0 → 0.50.
- * Aluminum Ingot / Duraluminum Ingot / Plastanium Ingot: inferred — verify in-game.
- * armor_plating / industrial_pump / military_power_regulator / thermoelectric_cooler: estimated.
+ * All values confirmed from awakening.wiki item pages (infobox Volume field).
  */
 export const VOLUME_TABLE: Record<string, number> = {
   // ── Ingots ────────────────────────────────────────────────────────────────────
   copper_ingot: 0.25,
   iron_ingot: 0.4,
   steel_ingot: 0.5,
-  aluminum_ingot: 0.6,
+  aluminum_ingot: 0.7,
   duraluminum_ingot: 0.9,
-  plastanium_ingot: 0.9,
+  plastanium_ingot: 1.0,
 
   // ── Processed materials ───────────────────────────────────────────────────────
   silicone_block: 0.1,
-  cobalt_paste: 0.5,
-  spice_melange: 0.25,
+  cobalt_paste: 1.0,
+  spice_melange: 0.2,
 
   // ── Raw stone / sand ──────────────────────────────────────────────────────────
   plastone: 1.0,
@@ -152,10 +148,10 @@ export const VOLUME_TABLE: Record<string, number> = {
   calibrated_servok: 0.1,
   complex_machinery: 0.1,
   advanced_machinery: 0.1,
-  armor_plating: 0.5,
+  armor_plating: 0.1,
   industrial_pump: 0.1,
   military_power_regulator: 0.1,
-  salvaged_metal: 0.4,
+  salvaged_metal: 0.15,
   thermoelectric_cooler: 0.1,
 
   // ── Sample data materials (hand-authored items_data.json) ─────────────────────
