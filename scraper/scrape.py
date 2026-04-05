@@ -25,6 +25,7 @@ import argparse
 import copy
 import json
 import logging
+import math
 import os
 import re
 import sys
@@ -456,17 +457,20 @@ def scrape_consumables(soup: BeautifulSoup, item_name: str) -> list[dict[str, An
                 if not mat_name:
                     continue
 
-                # Second cell: burn time — extract numeric hours
+                # Second cell: burn time — extract numeric hours or days
                 burn_text = cells[1].get_text(strip=True)
-                m = re.search(r"(\d+(?:\.\d+)?)\s*h", burn_text, re.IGNORECASE)
-                if not m:
+                m_hours = re.search(r"(\d+(?:\.\d+)?)\s*h", burn_text, re.IGNORECASE)
+                m_days = re.search(r"(\d+(?:\.\d+)?)\s*day", burn_text, re.IGNORECASE)
+                if m_hours:
+                    burn_hours = float(m_hours.group(1))
+                elif m_days:
+                    burn_hours = float(m_days.group(1)) * 24
+                else:
                     log.warning(
                         "  [%s] unrecognised burn time format for '%s': '%s'",
                         item_name, mat_name, burn_text,
                     )
                     continue
-
-                burn_hours = float(m.group(1))
                 if burn_hours <= 0:
                     log.warning(
                         "  [%s] burn time <= 0 for '%s' — skipping", item_name, mat_name
