@@ -1,0 +1,14 @@
+services:
+  web:
+    image: nginx:alpine
+    container_name: arrakis-planner
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:7300:80"
+    volumes:
+      - ./dist:/usr/share/nginx/html:ro
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
