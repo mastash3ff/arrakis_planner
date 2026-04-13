@@ -3,12 +3,16 @@ name: Deploy
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   deploy:
     name: Build, Test & Deploy to S3
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      id-token: write   # required for OIDC token request
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -33,8 +37,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
 
       - name: Deploy to S3 + CloudFront
