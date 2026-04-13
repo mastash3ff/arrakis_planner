@@ -1,4 +1,5 @@
 import { useBuildStore, selectWaterBudget } from '@/store/buildStore';
+import { formatFillTime } from '@/lib/calculations';
 
 /**
  * Standalone water budget panel — available for use outside BuildSummary if needed.
@@ -7,12 +8,7 @@ import { useBuildStore, selectWaterBudget } from '@/store/buildStore';
 export default function WaterBudget() {
   const budget = useBuildStore(selectWaterBudget);
 
-  const fillLabel =
-    budget.hours_to_fill === Infinity
-      ? null
-      : budget.hours_to_fill < 24
-        ? `${budget.hours_to_fill.toFixed(1)}h`
-        : `${Math.floor(budget.hours_to_fill / 24)}d ${Math.round(budget.hours_to_fill % 24)}h`;
+  const fillLabel = formatFillTime(budget.hours_to_fill);
 
   return (
     <section className="bg-stone-900 border border-stone-700 rounded-lg overflow-hidden">

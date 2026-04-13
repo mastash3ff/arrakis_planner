@@ -263,3 +263,25 @@ export function computeTrips(materials: MaterialCost[], config: StorageConfig): 
   const trips = Math.ceil(total_volume / total_capacity);
   return { total_volume, total_capacity, trips };
 }
+
+// ─── formatFillTime ───────────────────────────────────────────────────────────
+
+/**
+ * Formats a water fill-time in hours into a human-readable string.
+ *
+ * Returns null when hours is Infinity (no production rate — caller decides label).
+ * Returns "X.Xh" format for values under 24 hours.
+ * Returns "Xd Yh" format for 24 hours or more.
+ *
+ * Note: Math.round on the remainder can produce "Xd 24h" at exact half-hour
+ * boundaries (e.g. 47.5h → "1d 24h"). This matches the existing display
+ * convention and is preserved intentionally.
+ *
+ * @param hours - Fill time in hours (output of computeWaterBudget().hours_to_fill).
+ * @returns Formatted string, or null for Infinity.
+ */
+export function formatFillTime(hours: number): string | null {
+  if (hours === Infinity) return null;
+  if (hours < 24) return `${hours.toFixed(1)}h`;
+  return `${Math.floor(hours / 24)}d ${Math.round(hours % 24)}h`;
+}

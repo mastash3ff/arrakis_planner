@@ -6,6 +6,7 @@ import {
   computeTrips,
   computeWaterBudget,
   flattenCraftingTree,
+  formatFillTime,
   sumBuildCost,
 } from './calculations';
 import type { BuildEntry, CraftingNode, Item, MaterialCost, StorageConfig } from '@/types';
@@ -381,5 +382,51 @@ describe('computeTrips', () => {
     const plan = computeTrips(materials, config);
     expect(plan.total_capacity).toBe(1350);
     expect(plan.trips).toBe(1);
+  });
+});
+
+// ─── formatFillTime ───────────────────────────────────────────────────────────
+
+describe('formatFillTime', () => {
+  it('returns null for Infinity', () => {
+    expect(formatFillTime(Infinity)).toBeNull();
+  });
+
+  it('formats 0h as "0.0h"', () => {
+    expect(formatFillTime(0)).toBe('0.0h');
+  });
+
+  it('formats a sub-24h decimal value', () => {
+    expect(formatFillTime(12.5)).toBe('12.5h');
+  });
+
+  it('formats just under 24h boundary', () => {
+    expect(formatFillTime(23.9)).toBe('23.9h');
+  });
+
+  it('formats exactly 24h as "1d 0h"', () => {
+    expect(formatFillTime(24)).toBe('1d 0h');
+  });
+
+  it('formats 48h as "2d 0h"', () => {
+    expect(formatFillTime(48)).toBe('2d 0h');
+  });
+
+  it('formats an over-24h value correctly — not toFixed(1)d', () => {
+    // 25.7h → 1 full day + 1.7h → "1d 2h" (Math.round(1.7) = 2), not "1.1d"
+    expect(formatFillTime(25.7)).toBe('1d 2h');
+  });
+
+  it('formats 50h as "2d 2h"', () => {
+    expect(formatFillTime(50)).toBe('2d 2h');
+  });
+
+  it('preserves the 47.5h edge case as "1d 24h" (Math.round behavior)', () => {
+    // 47.5 % 24 = 23.5 → Math.round(23.5) = 24 — intentional, documented in JSDoc
+    expect(formatFillTime(47.5)).toBe('1d 24h');
+  });
+
+  it('uses toFixed(1) for sub-24h — single decimal place', () => {
+    expect(formatFillTime(6)).toBe('6.0h');
   });
 });

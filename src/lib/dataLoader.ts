@@ -23,7 +23,7 @@ const VALID_CATEGORIES: ItemCategory[] = [
 export async function loadItemsData(): Promise<ItemsDataFile> {
   let raw: unknown;
   try {
-    const response = await fetch('/data/items_data.json');
+    const response = await fetch(`${import.meta.env.BASE_URL}data/items_data.json`);
     if (!response.ok) {
       throw new DataLoadError(
         `Failed to fetch items data: HTTP ${response.status} ${response.statusText}`

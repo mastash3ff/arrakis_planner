@@ -6,6 +6,7 @@ import {
   selectWaterBudget,
   useBuildStore,
 } from '@/store/buildStore';
+import { formatFillTime } from '@/lib/calculations';
 
 // ─── Sub-sections ──────────────────────────────────────────────────────────────
 
@@ -114,12 +115,8 @@ function PowerRow() {
 function WaterRow() {
   const budget = useBuildStore(selectWaterBudget);
 
-  const fillLabel =
-    budget.hours_to_fill === Infinity
-      ? '—'
-      : budget.hours_to_fill < 24
-        ? `${budget.hours_to_fill.toFixed(1)}h to fill`
-        : `${(budget.hours_to_fill / 24).toFixed(1)}d to fill`;
+  const formatted = formatFillTime(budget.hours_to_fill);
+  const fillLabel = formatted !== null ? `${formatted} to fill` : '—';
 
   return (
     <div className="flex items-center gap-4 flex-wrap">

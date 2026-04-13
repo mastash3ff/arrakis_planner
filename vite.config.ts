@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 export default defineConfig({
+  base: '/arrakis_planner/',
   plugins: [react()],
   resolve: {
     alias: {
@@ -17,5 +18,11 @@ export default defineConfig({
     environmentMatchGlobs: [
       ['src/**/*.test.tsx', 'happy-dom'],
     ],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'lcov'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: ['src/**/*.test.{ts,tsx}', 'src/main.tsx'],
+    },
   },
 });
