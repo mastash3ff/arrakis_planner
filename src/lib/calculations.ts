@@ -285,3 +285,20 @@ export function formatFillTime(hours: number): string | null {
   if (hours < 24) return `${hours.toFixed(1)}h`;
   return `${Math.floor(hours / 24)}d ${Math.round(hours % 24)}h`;
 }
+
+/**
+ * Format a duration in hours as a human-readable string, handling fractional hours.
+ * Used for filter/consumable queue runtime display.
+ * @example formatRuntime(7.5) → "7h 30m"
+ * @example formatRuntime(120) → "5d"
+ * @example formatRuntime(7.5 * 5) → "1d 13h 30m"
+ */
+export function formatRuntime(hours: number): string {
+  const days = Math.floor(hours / 24);
+  const remainingHours = hours % 24;
+  const wholeHrs = Math.floor(remainingHours);
+  const mins = Math.round((remainingHours - wholeHrs) * 60);
+  const timePart = mins > 0 ? `${wholeHrs}h ${mins}m` : wholeHrs > 0 ? `${wholeHrs}h` : '';
+  if (days === 0) return timePart || '0h';
+  return timePart ? `${days}d ${timePart}` : `${days}d`;
+}

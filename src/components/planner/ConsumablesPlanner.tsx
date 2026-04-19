@@ -1,11 +1,14 @@
-import { useState } from 'react';
 import { useBuildStore } from '@/store/buildStore';
 import { computeConsumables } from '@/lib/calculations';
 
 export default function ConsumablesPlanner() {
   const entries = useBuildStore((s) => s.plan.entries);
   const allItems = useBuildStore((s) => s.allItems);
-  const [days, setDays] = useState(1);
+  const allConsumables = useBuildStore((s) => s.allConsumables);
+  const days = useBuildStore((s) => s.days);
+  const setDays = useBuildStore((s) => s.setDays);
+
+  const consumableMap = new Map(allConsumables.map((c) => [c.id, c]));
 
   const consumables = computeConsumables(entries, allItems, days);
 
@@ -17,7 +20,7 @@ export default function ConsumablesPlanner() {
           <span className="text-stone-500 text-xs uppercase tracking-wider">Days</span>
           <div className="flex items-center gap-1">
             <button
-              onClick={() => setDays((d) => Math.max(1, d - 1))}
+              onClick={() => setDays(days - 1)}
               disabled={days <= 1}
               className="w-6 h-6 flex items-center justify-center bg-stone-800 hover:bg-stone-700 text-stone-300 rounded text-sm font-bold transition-colors disabled:opacity-30"
             >
@@ -27,7 +30,7 @@ export default function ConsumablesPlanner() {
               {days}
             </span>
             <button
-              onClick={() => setDays((d) => d + 1)}
+              onClick={() => setDays(days + 1)}
               className="w-6 h-6 flex items-center justify-center bg-stone-800 hover:bg-stone-700 text-stone-300 rounded text-sm font-bold transition-colors"
             >
               +
@@ -48,8 +51,8 @@ export default function ConsumablesPlanner() {
         <div className="divide-y divide-stone-800">
           {consumables.map((mat) => (
             <div key={mat.item_id} className="flex items-center justify-between px-4 py-2">
-              <span className="text-stone-300 text-sm capitalize">
-                {mat.item_id.replace(/_/g, ' ')}
+              <span className="text-stone-300 text-sm">
+                {consumableMap.get(mat.item_id)?.name ?? mat.item_id.replace(/_/g, ' ')}
               </span>
               <span className="font-mono text-sm tabular-nums font-medium text-amber-400">
                 {mat.quantity.toLocaleString()}

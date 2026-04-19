@@ -51,6 +51,12 @@ export interface Item {
    * E.g. Windtrap: 0.75 ml/s → 2700 ml/hr → fills 500 ml tank in ~11 min.
    */
   water_production_rate: number;
+  /**
+   * Number of filter queue slots. Null for structures with no filter slots
+   * (e.g. cisterns). Confirmed from wiki "Inventory Slot Capacity" field.
+   * Windtraps and turbines: 5. Does not include the active (burning) slot.
+   */
+  filter_capacity: number | null;
   /** Resources consumed per day while the structure is active. */
   consumables: MaterialCost[];
   /** Whether this structure can be deployed in the Deep Desert. */
@@ -106,6 +112,13 @@ export interface WaterBudget {
   hours_to_fill: number; // total_capacity / production_rate; Infinity when rate is 0
 }
 
+/** A craftable consumable item (filter, lubricant, fuel cell, etc.). */
+export interface ConsumableItem {
+  id: string;
+  name: string;
+  build_cost: MaterialCost[];
+}
+
 // ─── Data file schema ──────────────────────────────────────────────────────────
 
 /** Top-level shape of public/data/items_data.json */
@@ -113,6 +126,7 @@ export interface ItemsDataFile {
   version: string;
   scraped_at: string; // ISO 8601
   items: Item[];
+  consumables: ConsumableItem[];
 }
 
 // ─── Volume lookup table ───────────────────────────────────────────────────────
@@ -143,6 +157,11 @@ export const VOLUME_TABLE: Record<string, number> = {
   granite_stone: 1.0,
   spice_sand: 2.0,
   iron_ore: 1.0,
+
+  // ── Organic / raw ─────────────────────────────────────────────────────────────
+  spice_residue: 0.08,  // confirmed: awakening.wiki
+  irradiated_slag: 0.1, // confirmed: awakening.wiki
+  fuel_cell: 0.2,       // confirmed: awakening.wiki
 
   // ── Components ────────────────────────────────────────────────────────────────
   calibrated_servok: 0.1,

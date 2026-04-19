@@ -1,4 +1,4 @@
-import type { Item, ItemCategory, ItemsDataFile } from '@/types';
+import type { ConsumableItem, Item, ItemCategory, ItemsDataFile } from '@/types';
 
 export class DataLoadError extends Error {
   constructor(message: string) {
@@ -53,8 +53,12 @@ export function validateItemsData(raw: unknown): ItemsDataFile {
   if (!Array.isArray(data['items'])) {
     throw new DataLoadError('items_data.json: "items" must be an array');
   }
+  if (!Array.isArray(data['consumables'])) {
+    throw new DataLoadError('items_data.json: "consumables" must be an array');
+  }
 
   data['items'].forEach((item: unknown, i: number) => validateItem(item, i));
+  data['consumables'].forEach((c: unknown, i: number) => validateConsumableItem(c, i));
 
   return raw as ItemsDataFile;
 }
@@ -90,6 +94,11 @@ function validateItem(raw: unknown, index: number): void {
   if (!Array.isArray(item['build_cost'])) {
     throw new DataLoadError(`items[${index}] ("${item['id']}"): "build_cost" must be an array`);
   }
+  if (item['filter_capacity'] !== null && typeof item['filter_capacity'] !== 'number') {
+    throw new DataLoadError(
+      `items[${index}] ("${item['id']}"): "filter_capacity" must be a number or null`
+    );
+  }
   if (!Array.isArray(item['consumables'])) {
     throw new DataLoadError(`items[${index}] ("${item['id']}"): "consumables" must be an array`);
   }
@@ -107,6 +116,26 @@ function validateItem(raw: unknown, index: number): void {
   // Validate each consumable entry
   (item['consumables'] as unknown[]).forEach((c: unknown, j: number) => {
     validateMaterialCost(c, `items[${index}].consumables[${j}]`);
+  });
+}
+
+function validateConsumableItem(raw: unknown, index: number): asserts raw is ConsumableItem {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+    throw new DataLoadError(`consumables[${index}]: must be an object`);
+  }
+  const c = raw as Record<string, unknown>;
+  for (const field of ['id', 'name'] as const) {
+    if (typeof c[field] !== 'string') {
+      throw new DataLoadError(
+        `consumables[${index}]: missing required string field "${field}"`
+      );
+    }
+  }
+  if (!Array.isArray(c['build_cost'])) {
+    throw new DataLoadError(`consumables[${index}] ("${c['id']}"): "build_cost" must be an array`);
+  }
+  (c['build_cost'] as unknown[]).forEach((bc: unknown, j: number) => {
+    validateMaterialCost(bc, `consumables[${index}].build_cost[${j}]`);
   });
 }
 

@@ -4,12 +4,16 @@ import AppShell from '@/components/layout/AppShell';
 import Sidebar from '@/components/layout/Sidebar';
 import BuildSummary from '@/components/planner/BuildSummary';
 import ConsumablesPlanner from '@/components/planner/ConsumablesPlanner';
+import PowerConsumables from '@/components/planner/PowerConsumables';
+import WaterPlanner from '@/components/planner/WaterPlanner';
 import TripPlanner from '@/components/planner/TripPlanner';
 import type { BuildPlan } from '@/types';
 import { isValidPlan } from '@/lib/planValidator';
 
 // Read once at module load — URL cannot change between module evaluation and mount.
-const initialPlanParam = new URLSearchParams(window.location.search).get('plan');
+const _initialParams = new URLSearchParams(window.location.search);
+const initialPlanParam = _initialParams.get('plan');
+const initialDaysParam = _initialParams.get('days');
 
 function encodePlan(plan: BuildPlan): string {
   return btoa(JSON.stringify(plan))
@@ -35,6 +39,8 @@ export default function App() {
   const isLoaded = useBuildStore((s) => s.isLoaded);
   const loadError = useBuildStore((s) => s.loadError);
   const plan = useBuildStore((s) => s.plan);
+  const days = useBuildStore((s) => s.days);
+  const setDays = useBuildStore((s) => s.setDays);
   const didImportFromUrl = useRef(false);
 
   useEffect(() => {
@@ -49,9 +55,13 @@ export default function App() {
       const decoded = decodePlan(initialPlanParam);
       if (decoded) importPlan(decoded);
     }
-  }, [isLoaded, importPlan]);
+    if (initialDaysParam) {
+      const d = parseInt(initialDaysParam, 10);
+      if (!isNaN(d) && d >= 1) setDays(d);
+    }
+  }, [isLoaded, importPlan, setDays]);
 
-  // Keep URL in sync with current plan so Share button always reflects latest state.
+  // Keep URL in sync with plan + days so Share button always reflects latest state.
   useEffect(() => {
     if (!isLoaded) return;
     const url = new URL(window.location.href);
@@ -60,8 +70,13 @@ export default function App() {
     } else {
       url.searchParams.delete('plan');
     }
+    if (days > 1) {
+      url.searchParams.set('days', String(days));
+    } else {
+      url.searchParams.delete('days');
+    }
     window.history.replaceState(null, '', url.toString());
-  }, [plan, isLoaded]);
+  }, [plan, days, isLoaded]);
 
   if (!isLoaded) {
     return (
@@ -96,6 +111,8 @@ export default function App() {
       <div className="space-y-4">
         <BuildSummary />
         <ConsumablesPlanner />
+        <PowerConsumables />
+        <WaterPlanner />
         <TripPlanner />
       </div>
     </AppShell>

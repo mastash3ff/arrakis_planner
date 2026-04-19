@@ -10,6 +10,7 @@ import { CONTAINER_PRESETS } from '@/types';
 import type {
   BuildEntry,
   BuildPlan,
+  ConsumableItem,
   Item,
   MaterialCost,
   PowerBudget,
@@ -23,6 +24,7 @@ import type {
 interface BuildStoreState {
   // Data layer
   allItems: Item[];
+  allConsumables: ConsumableItem[];
   isLoaded: boolean;
   loadError: string | null;
 
@@ -30,8 +32,12 @@ interface BuildStoreState {
   plan: BuildPlan;
   storageConfig: StorageConfig;
 
+  // Shared planning horizon (days) — used by Consumables, Power, and Water planners
+  days: number;
+
   // Actions
   initializeStore: () => Promise<void>;
+  setDays: (days: number) => void;
   addEntry: (item_id: string) => void;
   updateQuantity: (item_id: string, quantity: number) => void;
   removeEntry: (item_id: string) => void;
@@ -45,6 +51,7 @@ interface BuildStoreState {
 
 export const useBuildStore = create<BuildStoreState>((set, get) => ({
   allItems: [],
+  allConsumables: [],
   isLoaded: false,
   loadError: null,
 
@@ -57,10 +64,14 @@ export const useBuildStore = create<BuildStoreState>((set, get) => ({
     containers: [{ ...CONTAINER_PRESETS[2] }], // default: 1x Assault Ornithopter (1000V)
   },
 
+  days: 1,
+
+  setDays: (days: number) => set({ days: Math.max(1, days) }),
+
   initializeStore: async () => {
     try {
       const data = await loadItemsData();
-      set({ allItems: data.items, isLoaded: true, loadError: null });
+      set({ allItems: data.items, allConsumables: data.consumables, isLoaded: true, loadError: null });
     } catch (e) {
       set({
         loadError: e instanceof Error ? e.message : 'Unknown error loading data',
