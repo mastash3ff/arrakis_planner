@@ -321,8 +321,18 @@ def scrape_item_page(url: str, soup: BeautifulSoup) -> dict[str, Any] | None:
         log.info("  Skipping '%s': no buildable_type and no build_cost — not a placeable", name)
         return None
 
+    # ── Filter queue capacity ─────────────────────────────────────────────────
+    # "Inventory Slot Capacity" on the wiki = number of filter slots in the queue.
+    # Only present on structures that consume slot-based filters (windtraps,
+    # turbines, spice generator). Null for structures without filter slots.
+    raw_slot_cap = infobox_data.get("inventory_slot_capacity")
+    filter_capacity: int | None = (
+        parse_number(raw_slot_cap, "filter_capacity", name) if raw_slot_cap else None
+    )
+
     # ── Consumables section ───────────────────────────────────────────────────
-    consumables = scrape_consumables(soup, name)
+    consumable_name_map: dict[str, str] = {}
+    consumables = scrape_consumables(soup, name, name_map=consumable_name_map)
 
     item: dict[str, Any] = {
         "id": item_id,
@@ -333,8 +343,10 @@ def scrape_item_page(url: str, soup: BeautifulSoup) -> dict[str, Any] | None:
         "power_delta": power_delta,
         "water_capacity": water_capacity,
         "water_production_rate": water_production_rate,
+        "filter_capacity": filter_capacity,
         "consumables": consumables,
         "deep_desert_eligible": deep_desert_eligible,
+        "_consumable_names": consumable_name_map,
     }
     if incomplete:
         item["incomplete"] = True
@@ -402,7 +414,11 @@ def scrape_build_cost(soup: BeautifulSoup, item_name: str) -> list[dict[str, Any
     return costs
 
 
-def scrape_consumables(soup: BeautifulSoup, item_name: str) -> list[dict[str, Any]]:
+def scrape_consumables(
+    soup: BeautifulSoup,
+    item_name: str,
+    name_map: dict[str, str] | None = None,
+) -> list[dict[str, Any]]:
     """
     Parse the "Consumables" section on an item page.
 
@@ -419,6 +435,9 @@ def scrape_consumables(soup: BeautifulSoup, item_name: str) -> list[dict[str, An
 
     Quantity is derived as math.ceil(24 / burn_hours), representing how many
     consumables are needed per day of continuous operation.
+
+    If name_map is provided, it is populated with {item_id: display_name} entries
+    so callers can reconstruct correct wiki URLs (some names use hyphens, not underscores).
     """
     costs: list[dict[str, Any]] = []
 
@@ -450,20 +469,42 @@ def scrape_consumables(soup: BeautifulSoup, item_name: str) -> list[dict[str, An
 
                 # First cell: consumable name (via link text or plain text)
                 mat_name = ""
+                mat_href = ""
                 for a in cells[0].find_all("a"):
-                    mat_name = a.get_text(strip=True)
-                    if mat_name:
+                    text = a.get_text(strip=True)
+                    if text:
+                        mat_name = text
+                        mat_href = a.get("href", "")
                         break
                 if not mat_name:
                     mat_name = cells[0].get_text(strip=True)
                 if not mat_name:
                     continue
 
+                item_id = slugify(mat_name)
+
+                # Record display name so we can build the correct wiki URL later.
+                # Prefer the href path (e.g. "/Industrial-grade_Lubricant") over
+                # reconstructing from the display name, since the wiki uses
+                # inconsistent capitalisation/hyphenation.
+                if name_map is not None:
+                    if mat_href.startswith("/") and ":" not in mat_href:
+                        name_map[item_id] = mat_href.lstrip("/")
+                    else:
+                        name_map[item_id] = mat_name.replace(" ", "_")
+
                 # Second cell: burn time — extract numeric hours or days
                 burn_text = cells[1].get_text(strip=True)
+                # "1 hour 30 minutes", "3 hours", "1 day", "0.5 hours", etc.
+                m_compound = re.search(
+                    r"(\d+(?:\.\d+)?)\s*hour[s]?\s+(\d+)\s*minute[s]?",
+                    burn_text, re.IGNORECASE,
+                )
                 m_hours = re.search(r"(\d+(?:\.\d+)?)\s*h", burn_text, re.IGNORECASE)
                 m_days = re.search(r"(\d+(?:\.\d+)?)\s*day", burn_text, re.IGNORECASE)
-                if m_hours:
+                if m_compound:
+                    burn_hours = float(m_compound.group(1)) + int(m_compound.group(2)) / 60
+                elif m_hours:
                     burn_hours = float(m_hours.group(1))
                 elif m_days:
                     burn_hours = float(m_days.group(1)) * 24
@@ -480,12 +521,166 @@ def scrape_consumables(soup: BeautifulSoup, item_name: str) -> list[dict[str, An
                     continue
 
                 qty_per_day = math.ceil(24 / burn_hours)
-                costs.append({"item_id": slugify(mat_name), "quantity": qty_per_day})
+                costs.append({"item_id": item_id, "quantity": qty_per_day})
 
             break
         sibling = sibling.find_next_sibling()
 
     return costs
+
+
+# ─── Consumable item scraping ───────────────────────────────────────────────────
+
+def collect_consumable_info(items: list[dict[str, Any]]) -> dict[str, str]:
+    """
+    Return {item_id: wiki_path} for all consumables referenced across all placeables.
+
+    wiki_path is the URL path segment extracted from the href on the placeable's
+    consumables table (e.g. "Industrial-grade_Lubricant"), which preserves the wiki's
+    exact capitalisation and hyphenation. Falls back to Title_Case reconstruction
+    when no href was captured.
+    """
+    result: dict[str, str] = {}
+    for item in items:
+        name_map: dict[str, str] = item.get("_consumable_names", {})
+        for c in item.get("consumables", []):
+            cid = c["item_id"]
+            if cid not in result:
+                if cid in name_map:
+                    result[cid] = name_map[cid]
+                else:
+                    result[cid] = "_".join(word.capitalize() for word in cid.split("_"))
+    return result
+
+
+def scrape_consumable_page(url: str, soup: BeautifulSoup) -> dict[str, Any] | None:
+    """
+    Parse a consumable item page (filter, etc.) into a ConsumableItem dict.
+
+    Consumable pages use a "Crafted By" heading with a three-column wikitable
+    (Production Types | Ingredients | Products). Only the Ingredients column is
+    extracted. These pages have no infobox fields relevant to the planner.
+    """
+    name_tag = soup.select_one("h1#firstHeading, h1.page-header__title")
+    if not name_tag:
+        log.warning("Could not find page title at %s — skipping", url)
+        return None
+    name = name_tag.get_text(strip=True)
+    item_id = slugify(name)
+    log.info("  Parsing consumable: %s (id=%s)", name, item_id)
+
+    build_cost = scrape_crafted_by(soup, name)
+    if not build_cost:
+        log.warning("  [%s] no crafting recipe found for consumable", name)
+
+    return {
+        "id": item_id,
+        "name": name,
+        "build_cost": build_cost,
+    }
+
+
+def scrape_crafted_by(soup: BeautifulSoup, item_name: str) -> list[dict[str, Any]]:
+    """
+    Parse the "Crafted By" section on a consumable item page.
+
+    awakening.wiki structure:
+        <h2>Crafted By</h2>
+        <table class="wikitable mw-collapsible">
+          <tr><th>Production Types</th><th>Ingredients</th><th>Products</th></tr>
+          <tr>
+            <td><ul><li><a>Survival Fabricator</a></li></ul></td>
+            <td><ul>
+              <li><a>Steel Ingot</a> x3</li>
+              <li><a>Plant Fiber</a> x5</li>
+            </ul></td>
+            <td>...</td>
+          </tr>
+        </table>
+
+    If multiple recipes exist, only the first is used.
+    Water entries (no <a> link, just "NmL Water") are skipped.
+    """
+    costs: list[dict[str, Any]] = []
+
+    crafted_by_heading = None
+    for heading in soup.find_all(["h2", "h3"]):
+        text = heading.get_text(strip=True).lower()
+        if "crafted" in text:
+            crafted_by_heading = heading
+            break
+
+    if not crafted_by_heading:
+        return costs
+
+    sibling = crafted_by_heading.find_next_sibling()
+    while sibling:
+        if sibling.name in ("h2", "h3"):
+            break
+        if sibling.name == "table":
+            rows = sibling.select("tr")
+            for row in rows:
+                cells = row.find_all(["th", "td"])
+                # Need at least 3 columns; skip header row
+                if len(cells) < 3 or all(c.name == "th" for c in cells):
+                    continue
+                # Ingredients are in the second column (index 1)
+                ingredients_cell = cells[1]
+                for li in ingredients_cell.select("li"):
+                    mat_name = ""
+                    for a in li.find_all("a"):
+                        mat_name = a.get_text(strip=True)
+                        if mat_name:
+                            break
+                    if not mat_name:
+                        continue
+                    li_text = li.get_text(strip=True)
+                    m = re.search(r"[xX×]\s*(\d+)", li_text)
+                    if m:
+                        costs.append({"item_id": slugify(mat_name), "quantity": int(m.group(1))})
+                break  # only parse first recipe row
+            break
+        sibling = sibling.find_next_sibling()
+
+    return costs
+
+
+def scrape_consumables_list(
+    consumable_info: dict[str, str],
+    session: requests.Session,
+    dry_run: bool = False,
+) -> list[dict[str, Any]]:
+    """Scrape wiki pages for all referenced consumable items and return ConsumableItem list."""
+    results: list[dict[str, Any]] = []
+    ids = sorted(consumable_info.keys())
+    limit = DRY_RUN_ITEM_LIMIT if dry_run else len(ids)
+
+    for item_id in ids[:limit]:
+        wiki_path = consumable_info[item_id]
+        url = f"{BASE_URL}/{wiki_path}"
+        try:
+            soup = fetch(url, session)
+            consumable = scrape_consumable_page(url, soup)
+            if consumable:
+                results.append(consumable)
+                log.info("  ✓ %s", consumable["name"])
+        except Exception as exc:
+            log.error("  ✗ Failed to scrape consumable %s: %s", url, exc)
+
+    return results
+
+
+def load_fallback_consumables() -> list[dict[str, Any]]:
+    """Load consumables from the fallback public/data/items_data.json if present."""
+    fallback = os.path.normpath(FALLBACK_DATA_PATH)
+    try:
+        with open(fallback, encoding="utf-8") as f:
+            data = json.load(f)
+        consumables: list[dict[str, Any]] = data.get("consumables", [])
+        log.info("Loaded %d fallback consumables", len(consumables))
+        return consumables
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
 
 
 # ─── Merge logic ────────────────────────────────────────────────────────────────
@@ -630,19 +825,38 @@ def main() -> None:
 
     log.info("Scraped/loaded %d items total", len(items))
 
-    # 4. Apply manual overrides
+    # 4. Collect consumable info from scraped placeables, then strip temp fields
+    consumable_info = collect_consumable_info(items)
+    for item in items:
+        item.pop("_consumable_names", None)
+    log.info(
+        "Found %d unique consumable item IDs: %s",
+        len(consumable_info), sorted(consumable_info.keys()),
+    )
+
+    # 5. Scrape consumable items referenced by placeables
+    consumables: list[dict[str, Any]] = []
+    if wiki_available:
+        consumables = scrape_consumables_list(consumable_info, session, dry_run=args.dry_run)
+        log.info("Scraped %d consumable items", len(consumables))
+    else:
+        if not args.dry_run:
+            consumables = load_fallback_consumables()
+
+    # 6. Apply manual overrides
     if args.merge and items:
         log.info("Merging manual overrides from %s", OVERRIDES_PATH)
         items = apply_overrides(items, OVERRIDES_PATH)
 
-    # 5. Build output document
+    # 7. Build output document
     output: dict[str, Any] = {
         "version": "1.0.0",
         "scraped_at": datetime.now(timezone.utc).isoformat(),
         "items": items,
+        "consumables": consumables,
     }
 
-    # 6. Log or write
+    # 8. Log or write
     if args.dry_run:
         log.info("DRY RUN output (not written):")
         print(json.dumps(output, indent=2, ensure_ascii=False))
