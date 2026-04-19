@@ -23,6 +23,7 @@ function makeItem(overrides: Partial<Item> = {}): Item {
     water_capacity: 0,
     water_production_rate: 0,
     consumables: [],
+    filter_capacity: null,
     deep_desert_eligible: true,
     ...overrides,
   };
@@ -336,5 +337,37 @@ describe('buildStore — named selectors', () => {
       expect(budget.production_rate).toBe(200);  // 100 × 2
       expect(budget.hours_to_fill).toBe(50);     // 10000 / 200
     });
+  });
+});
+
+// ─── days / setDays ───────────────────────────────────────────────────────────
+
+describe('buildStore — days', () => {
+  beforeEach(() => {
+    useBuildStore.setState({ days: 1 });
+  });
+
+  it('initialises to 1', () => {
+    expect(useBuildStore.getState().days).toBe(1);
+  });
+
+  it('setDays updates the value', () => {
+    useBuildStore.getState().setDays(7);
+    expect(useBuildStore.getState().days).toBe(7);
+  });
+
+  it('setDays clamps to minimum 1 when called with 0', () => {
+    useBuildStore.getState().setDays(0);
+    expect(useBuildStore.getState().days).toBe(1);
+  });
+
+  it('setDays clamps to minimum 1 when called with negative value', () => {
+    useBuildStore.getState().setDays(-5);
+    expect(useBuildStore.getState().days).toBe(1);
+  });
+
+  it('setDays accepts large values', () => {
+    useBuildStore.getState().setDays(365);
+    expect(useBuildStore.getState().days).toBe(365);
   });
 });

@@ -3,11 +3,21 @@ import { DataLoadError, validateItemsData } from '@/lib/dataLoader';
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
+function makeValidConsumable(overrides: Record<string, unknown> = {}): unknown {
+  return {
+    id: 'makeshift_filter',
+    name: 'Makeshift Filter',
+    build_cost: [{ item_id: 'steel_ingot', quantity: 3 }],
+    ...overrides,
+  };
+}
+
 function makeValidFile(overrides: Record<string, unknown> = {}): unknown {
   return {
     version: '1.0.0',
     scraped_at: '2026-01-01T00:00:00Z',
     items: [makeValidItem()],
+    consumables: [makeValidConsumable()],
     ...overrides,
   };
 }
@@ -22,6 +32,7 @@ function makeValidItem(overrides: Record<string, unknown> = {}): unknown {
     power_delta: -5,
     water_capacity: 500,
     water_production_rate: 0.75,
+    filter_capacity: null,
     consumables: [{ item_id: 'makeshift_filter', quantity: 8 }],
     deep_desert_eligible: true,
     ...overrides,
@@ -189,5 +200,53 @@ describe('validateItemsData', () => {
     } catch (e) {
       expect((e as DataLoadError).message).toContain('items[0]');
     }
+  });
+
+  // ── filter_capacity validation ────────────────────────────────────────────────
+
+  it('accepts filter_capacity as null', () => {
+    const file = makeValidFile({ items: [makeValidItem({ filter_capacity: null })] });
+    expect(() => validateItemsData(file)).not.toThrow();
+  });
+
+  it('accepts filter_capacity as a number', () => {
+    const file = makeValidFile({ items: [makeValidItem({ filter_capacity: 5 })] });
+    expect(() => validateItemsData(file)).not.toThrow();
+  });
+
+  it('rejects filter_capacity as a string', () => {
+    const file = makeValidFile({ items: [makeValidItem({ filter_capacity: '5' })] });
+    expect(() => validateItemsData(file)).toThrow(DataLoadError);
+  });
+
+  // ── consumables[] validation ───────────────────────────────────────────────────
+
+  it('accepts a valid consumable item in the consumables array', () => {
+    const file = makeValidFile({
+      consumables: [makeValidConsumable()],
+    });
+    expect(() => validateItemsData(file)).not.toThrow();
+  });
+
+  it('rejects consumable missing id field', () => {
+    const file = makeValidFile({ consumables: [makeValidConsumable({ id: undefined })] });
+    expect(() => validateItemsData(file)).toThrow(DataLoadError);
+  });
+
+  it('rejects consumable missing name field', () => {
+    const file = makeValidFile({ consumables: [makeValidConsumable({ name: undefined })] });
+    expect(() => validateItemsData(file)).toThrow(DataLoadError);
+  });
+
+  it('rejects consumable with non-array build_cost', () => {
+    const file = makeValidFile({ consumables: [makeValidConsumable({ build_cost: 'bad' })] });
+    expect(() => validateItemsData(file)).toThrow(DataLoadError);
+  });
+
+  it('rejects consumable build_cost entry missing quantity', () => {
+    const file = makeValidFile({
+      consumables: [makeValidConsumable({ build_cost: [{ item_id: 'iron_ingot' }] })],
+    });
+    expect(() => validateItemsData(file)).toThrow(DataLoadError);
   });
 });

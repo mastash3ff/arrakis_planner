@@ -17,6 +17,7 @@ function makeItem(overrides: Partial<Item>): Item {
     water_capacity: 0,
     water_production_rate: 0,
     consumables: [],
+    filter_capacity: null,
     deep_desert_eligible: true,
     ...overrides,
   };
@@ -28,7 +29,8 @@ const fabricator = makeItem({
   id: 'fabricator',
   name: 'Fabricator',
   category: 'production',
-  deep_desert_eligible: false,
+  filter_capacity: null,
+    deep_desert_eligible: false,
 });
 
 const RESET_STATE = {

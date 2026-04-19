@@ -7,6 +7,7 @@ import {
   computeWaterBudget,
   flattenCraftingTree,
   formatFillTime,
+  formatRuntime,
   sumBuildCost,
 } from './calculations';
 import type { BuildEntry, CraftingNode, Item, MaterialCost, StorageConfig } from '@/types';
@@ -27,7 +28,8 @@ const windtrapT1: Item = {
   water_capacity: 500,
   water_production_rate: 50,
   consumables: [],
-  deep_desert_eligible: true,
+  filter_capacity: null,
+    deep_desert_eligible: true,
 };
 
 /** Windtrap T2 — has crafting tree with two-level intermediates. */
@@ -68,7 +70,8 @@ const windtrapT2: Item = {
   water_capacity: 2500,
   water_production_rate: 250,
   consumables: [],
-  deep_desert_eligible: true,
+  filter_capacity: null,
+    deep_desert_eligible: true,
 };
 
 /** Solar collector — generates power. */
@@ -96,7 +99,8 @@ const solarCollector: Item = {
   water_capacity: 0,
   water_production_rate: 0,
   consumables: [],
-  deep_desert_eligible: true,
+  filter_capacity: null,
+    deep_desert_eligible: true,
 };
 
 /** Spice refinery — consumes water per day. */
@@ -110,7 +114,8 @@ const spiceRefinery: Item = {
   water_capacity: 0,
   water_production_rate: 0,
   consumables: [{ item_id: 'water', quantity: 200 }],
-  deep_desert_eligible: true,
+  filter_capacity: null,
+    deep_desert_eligible: true,
 };
 
 const ALL_ITEMS: Item[] = [windtrapT1, windtrapT2, solarCollector, spiceRefinery];
@@ -428,5 +433,43 @@ describe('formatFillTime', () => {
 
   it('uses toFixed(1) for sub-24h — single decimal place', () => {
     expect(formatFillTime(6)).toBe('6.0h');
+  });
+});
+
+describe('formatRuntime', () => {
+  it('returns "0h" for zero hours', () => {
+    expect(formatRuntime(0)).toBe('0h');
+  });
+
+  it('formats whole hours under a day', () => {
+    expect(formatRuntime(5)).toBe('5h');
+  });
+
+  it('formats fractional hours with minutes — 1.5h → "1h 30m"', () => {
+    expect(formatRuntime(1.5)).toBe('1h 30m');
+  });
+
+  it('formats fractional hours — 7.5h → "7h 30m"', () => {
+    expect(formatRuntime(7.5)).toBe('7h 30m');
+  });
+
+  it('formats exactly one day as "1d"', () => {
+    expect(formatRuntime(24)).toBe('1d');
+  });
+
+  it('formats days + whole hours — 25h → "1d 1h"', () => {
+    expect(formatRuntime(25)).toBe('1d 1h');
+  });
+
+  it('formats days + fractional hours — 25.5h → "1d 1h 30m"', () => {
+    expect(formatRuntime(25.5)).toBe('1d 1h 30m');
+  });
+
+  it('formats 120h (5 × 24h APF queue) as "5d"', () => {
+    expect(formatRuntime(120)).toBe('5d');
+  });
+
+  it('formats 7.5h (5 slots × 1.5h lubricant) as "7h 30m"', () => {
+    expect(formatRuntime(7.5)).toBe('7h 30m');
   });
 });

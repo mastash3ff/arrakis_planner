@@ -17,6 +17,7 @@ function makeItem(overrides: Partial<Item>): Item {
     water_capacity: 0,
     water_production_rate: 0,
     consumables: [],
+    filter_capacity: null,
     deep_desert_eligible: false,
     ...overrides,
   };
@@ -32,11 +33,21 @@ const windtrap = makeItem({
 // Generator: no consumables
 const generator = makeItem({ id: 'generator', name: 'Generator', consumables: [] });
 
+const allConsumables = [
+  {
+    id: 'makeshift_filter',
+    name: 'Makeshift Filter',
+    build_cost: [{ item_id: 'steel_ingot', quantity: 3 }],
+  },
+];
+
 const RESET_STATE = {
   allItems: [windtrap, generator],
+  allConsumables,
   isLoaded: true,
   loadError: null,
   plan: { entries: [], dd_mode: false },
+  days: 1,
 };
 
 // ─── Tests ────────────────────────────────────────────────────────────────────
@@ -105,7 +116,7 @@ describe('ConsumablesPlanner', () => {
       plan: { entries: [{ item_id: 'windtrap', quantity: 1 }], dd_mode: false },
     });
     render(<ConsumablesPlanner />);
-    expect(screen.getByText('makeshift filter')).toBeTruthy();
+    expect(screen.getByText('Makeshift Filter')).toBeTruthy();
   });
 
   it('shows correct quantity for 1 day', () => {
